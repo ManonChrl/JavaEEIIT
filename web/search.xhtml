@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./WEB-INF/publicTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Result for : 
+        <h:outputText value="#{productController.getSearch()}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <br/><br/><br/>
+        <h3><h:outputText rendered="#{not empty productBean.findByDescription(productController.getSearch())}" value="In description:"/> </h3>
+        <h:dataTable 
+            rendered="#{not empty productBean.findByDescription(productController.getSearch())}"
+            class="table table-hover table-striped" 
+            value="#{productBean.findByDescription(productController.getSearch())}" 
+            var="product">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description"/>
+                </f:facet>
+                <h:outputText style="text-decoration: underline" value="#{product.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{product.price}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Size"/>
+                </f:facet>
+                <h:outputText value="#{product.sizeProduct}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Color"/>
+                </f:facet>
+                <h:outputText value="#{product.color}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Brand"/>
+                </f:facet>
+                <h:outputText value="#{product.brand}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText value="#{product.type}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gender"/>
+                </f:facet>
+                <h:outputText value="#{product.gender}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Quantity"/>
+                </f:facet>
+                <h:outputText value="#{product.quantity}"/>
+            </h:column>
+        </h:dataTable>
+        <h3><h:outputText rendered="#{not empty productBean.findByBrand(productController.getSearch())}" value="In Brand:"/></h3> 
+        <h:dataTable 
+            rendered="#{not empty productBean.findByBrand(productController.getSearch())}"
+            class="table table-hover table-striped" 
+            value="#{productBean.findByBrand(productController.getSearch())}" 
+            var="product">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description"/>
+                </f:facet>
+                <h:outputText value="#{product.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{product.price}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Size"/>
+                </f:facet>
+                <h:outputText value="#{product.sizeProduct}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Color"/>
+                </f:facet>
+                <h:outputText value="#{product.color}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Brand"/>
+                </f:facet>
+                <h:outputText style="text-decoration: underline" value="#{product.brand}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText value="#{product.type}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gender"/>
+                </f:facet>
+                <h:outputText value="#{product.gender}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Quantity"/>
+                </f:facet>
+                <h:outputText value="#{product.quantity}"/>
+            </h:column>
+        </h:dataTable>
+        <h3><h:outputText rendered="#{not empty productBean.findByType(productController.getSearch())}" value="In Type:"/> </h3>
+        <h:dataTable 
+            rendered="#{not empty productBean.findByType(productController.getSearch())}"
+            class="table table-hover table-striped" 
+            value="#{productBean.findByType(productController.getSearch())}" 
+            var="product">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description"/>
+                </f:facet>
+                <h:outputText value="#{product.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{product.price}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Size"/>
+                </f:facet>
+                <h:outputText value="#{product.sizeProduct}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Color"/>
+                </f:facet>
+                <h:outputText value="#{product.color}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Brand"/>
+                </f:facet>
+                <h:outputText value="#{product.brand}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText style="text-decoration: underline" value="#{product.type}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gender"/>
+                </f:facet>
+                <h:outputText value="#{product.gender}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Quantity"/>
+                </f:facet>
+                <h:outputText value="#{product.quantity}"/>
+            </h:column>
+        </h:dataTable>
+        <h3><h:outputText rendered="#{not empty productBean.findByGender(productController.getSearch())}" value="In Gender:"/> </h3>
+        <h:dataTable 
+            rendered="#{not empty productBean.findByGender(productController.getSearch())}"
+            class="table table-hover table-striped" 
+            value="#{productBean.findByGender(productController.getSearch())}" 
+            var="product">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description"/>
+                </f:facet>
+                <h:outputText value="#{product.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{product.price}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Size"/>
+                </f:facet>
+                <h:outputText value="#{product.sizeProduct}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Color"/>
+                </f:facet>
+                <h:outputText value="#{product.color}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Brand"/>
+                </f:facet>
+                <h:outputText value="#{product.brand}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText value="#{product.type}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gender"/>
+                </f:facet>
+                <h:outputText style="text-decoration: underline" value="#{product.gender}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Quantity"/>
+                </f:facet>
+                <h:outputText value="#{product.quantity}"/>
+            </h:column>
+        </h:dataTable>
+        <h3><h:outputText rendered="#{not empty productBean.findByColor(productController.getSearch())}" value="In Color:"/> </h3>
+        <h:dataTable 
+            rendered="#{not empty productBean.findByColor(productController.getSearch())}"
+            class="table table-hover table-striped" 
+            value="#{productBean.findByColor(productController.getSearch())}" 
+            var="product">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description"/>
+                </f:facet>
+                <h:outputText value="#{product.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{product.price}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Size"/>
+                </f:facet>
+                <h:outputText value="#{product.sizeProduct}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Color"/>
+                </f:facet>
+                <h:outputText style="text-decoration: underline" value="#{product.color}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Brand"/>
+                </f:facet>
+                <h:outputText value="#{product.brand}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText value="#{product.type}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gender"/>
+                </f:facet>
+                <h:outputText value="#{product.gender}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Quantity"/>
+                </f:facet>
+                <h:outputText value="#{product.quantity}"/>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+
+</ui:composition>

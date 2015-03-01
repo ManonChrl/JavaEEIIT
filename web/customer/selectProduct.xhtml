@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./../WEB-INF/customerTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+
+        <h:outputText rendered="#{not empty productController.getGenderPassedParameter()}" value="#{productController.getGenderPassedParameter()}"/>
+        <h:panelGroup layout="block" rendered="#{not empty productController.getTypePassedParameter()}">
+            <h2><h:outputText  value="#{productController.getTypePassedParameter()}"/></h2>
+        </h:panelGroup>
+        <h:outputText rendered="#{not empty productController.getAllPassedParameter()}" value="All Products" />
+    </ui:define>
+
+    <ui:define name="body">
+        <h:dataTable 
+            rendered="#{(not empty productController.getTypePassedParameter()) and (not empty productController.getGenderPassedParameter())}" 
+            class="table table-hover table-striped" 
+            value="#{productBean.findByTypeAndGender(productController.getTypePassedParameter(),productController.getGenderPassedParameter())}" 
+            var="product">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description"/>
+                </f:facet>
+                <h:outputText value="#{product.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{product.price}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Size"/>
+                </f:facet>
+                <h:outputText value="#{product.sizeProduct}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Color"/>
+                </f:facet>
+                <h:outputText value="#{product.color}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Brand"/>
+                </f:facet>
+                <h:outputText value="#{product.brand}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText value="#{product.type}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gender"/>
+                </f:facet>
+                <h:outputText value="#{product.gender}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Quantity"/>
+                </f:facet>
+                <h:outputText value="#{product.quantity}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Add Product to Cart"/>
+                </f:facet>
+                <h:panelGroup layout="block" class="form-group">
+                    <h:panelGroup layout="block" class="col-sm-offset-2 col-sm-10">
+                        <h:link rendered="#{product.quantity!=0}" outcome="addProductToCart.xhtml" value="Add">
+                            <f:param name="productID" value="#{product.productID}"/>
+                        </h:link>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:column>
+        </h:dataTable>
+        <h:dataTable 
+            rendered="#{(empty productController.getTypePassedParameter()) and (not empty productController.getGenderPassedParameter())}" 
+            class="table table-hover table-striped" 
+            value="#{productBean.findByGender(productController.getGenderPassedParameter())}" 
+            var="product">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description"/>
+                </f:facet>
+                <h:outputText value="#{product.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{product.price}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Size"/>
+                </f:facet>
+                <h:outputText value="#{product.sizeProduct}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Color"/>
+                </f:facet>
+                <h:outputText value="#{product.color}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Brand"/>
+                </f:facet>
+                <h:outputText value="#{product.brand}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText value="#{product.type}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gender"/>
+                </f:facet>
+                <h:outputText value="#{product.gender}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Quantity"/>
+                </f:facet>
+                <h:outputText value="#{product.quantity}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Add Product to Cart"/>
+                </f:facet>
+                <h:panelGroup layout="block" class="form-group">
+                    <h:panelGroup layout="block" class="col-sm-offset-2 col-sm-10">
+                        <h:link rendered="#{product.quantity!=0}" outcome="addProductToCart.xhtml" value="Add">
+                            <f:param name="productID" value="#{product.productID}"/>
+                        </h:link>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:column>
+        </h:dataTable>
+        <h:panelGroup layout="block" rendered="#{not empty productController.getAllPassedParameter()}">
+            <ezcomp:products />
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>

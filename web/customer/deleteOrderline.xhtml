@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/customerTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        Do you want to delete this product ?
+    </ui:define>
+
+    <ui:define name="body">
+        <h:outputText value="#{productController.setOrderline(orderLineBean.findByOrderlineID(ordersController.getOLPassedParameter()))}"/>
+
+        <p:dataTable value="#{productController.orderline.getProducts()}" var="product">
+            <p:column headerText="Description">
+                <h:outputText value="#{product.description}"/>
+            </p:column>
+            <p:column headerText="Price">
+                <h:outputText value="#{product.price}"/>
+            </p:column>
+            <p:column headerText="Size">
+                <h:outputText value="#{product.sizeProduct}"/>
+            </p:column>
+            <p:column headerText="Color">
+                <h:outputText value="#{product.color}"/>
+            </p:column>
+            <p:column headerText="Brand">
+                <h:outputText value="#{product.brand}"/>
+            </p:column>
+            <p:column headerText="Type">
+                <h:outputText value="#{product.type}"/>
+            </p:column>
+            <p:column headerText="Gender">
+                <h:outputText value="#{product.gender}"/>
+            </p:column>
+        </p:dataTable>
+        <h:form>
+            <h:inputHidden id="orderlineID" value="#{productController.orderline.orderLineID}"/>
+            <h:commandButton value="Delete" action="#{productController.deleteOrderline()}"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

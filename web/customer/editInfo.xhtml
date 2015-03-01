@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <ui:define name="title">
+        Edit Info
+    </ui:define>
+
+    <ui:define name="body">
+        <h:outputText  value="#{customerController.setCustomer(customerBean.findByLogin(facesContext.externalContext.remoteUser))}"/>
+        <h:outputText value="#{customerController.setAddress(customerBean.findByLogin(facesContext.externalContext.remoteUser).address)}"/>
+        <h:panelGroup rendered="#{not customerFN.valid || not customerLN.valid
+                                  || not customerEmail.valid || not customerPNo.valid
+                                  || not addressStreet.valid || not addressCity.valid
+                                  || not addressState.valid || not addressZipCode.valid || not addressCountry.valid}" 
+                      layout="block" class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h:messages layout="table" style="color:red"/>
+        </h:panelGroup>
+        <h:form class="form-horizontal">
+            <h:panelGroup layout="block" class="form-group">
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputHidden id="custID" class="form-control" value="#{customerController.customer.customerID}" />
+                </h:panelGroup>
+            </h:panelGroup>
+            Personal Info :
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="firstName" class="col-sm-2 control-label" value="First Name"/>
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{customerFN}" id="firstName" class="form-control" value="#{customerController.customer.firstName}" />
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="lastName" class="col-sm-2 control-label" value="Last Name" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{customerLN}" id="lastName" class="form-control" value="#{customerController.customer.lastName}" />
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="email" class="col-sm-2 control-label" value="Email" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{customerEmail}" id="email" class="form-control" value="#{customerController.customer.email}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="phoneNo" class="col-sm-2 control-label" value="Phone No" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{customerPNo}" id="phoneNo" class="form-control" value="#{customerController.customer.phoneNo}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            Address : 
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="street" class="col-sm-2 control-label" value="Street" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{addressStreet}" id="street" class="form-control" value="#{customerController.address.street}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="city" class="col-sm-2 control-label" value="City" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{addressCity}" id="city" class="form-control" value="#{customerController.address.city}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="state" class="col-sm-2 control-label" value="State" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{addressState}" id="state" class="form-control" value="#{customerController.address.state}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="zipCode" class="col-sm-2 control-label" value="Zip Code" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{addressZipCode}" id="zipCode" class="form-control" value="#{customerController.address.zipCode}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="country" class="col-sm-2 control-label" value="Country" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{addressCountry}" id="country" class="form-control" value="#{customerController.address.country}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:panelGroup layout="block" class="col-sm-offset-2 col-sm-10">
+                    <h:commandButton type="submit" value="Edit Info" action="#{customerController.editInfo()}"/>                    
+                    <h:link value="Cancel" outcome="infosCust.xhtml"/>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

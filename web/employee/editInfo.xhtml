@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/employeeTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <ui:define name="title">
+        Edit Info
+    </ui:define>
+
+    <ui:define name="body">
+        <h:outputText  value="#{employeeController.setEmployee(employeeBean.findByLogin(facesContext.externalContext.remoteUser))}"/>
+        <h:panelGroup rendered="#{not employeeFN.valid || not employeeLN.valid
+                                  || not employeeEmail.valid || not employeePNo.valid}" 
+                      layout="block" class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h:messages layout="table" style="color:red"/>
+        </h:panelGroup>
+        <h:form class="form-horizontal">
+            <h:panelGroup layout="block" class="form-group">
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputHidden id="empID" class="form-control" value="#{employeeController.employee.employeeID}" />
+                </h:panelGroup>
+            </h:panelGroup>
+            Personal Info :
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="firstName" class="col-sm-2 control-label" value="First Name"/>
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{employeeFN}" id="firstName" class="form-control" value="#{employeeController.employee.firstName}" />
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="lastName" class="col-sm-2 control-label" value="Last Name" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{employeeLN}" id="lastName" class="form-control" value="#{employeeController.employee.lastName}" />
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="email" class="col-sm-2 control-label" value="Email" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{employeeEmail}" id="email" class="form-control" value="#{employeeController.employee.email}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="phoneNo" class="col-sm-2 control-label" value="Phone No" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText binding="#{employeePNo}" id="phoneNo" class="form-control" value="#{employeeController.employee.phoneNo}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:panelGroup layout="block" class="col-sm-offset-2 col-sm-10">
+                    <h:commandButton type="submit" value="Edit Info" action="#{employeeController.editInfo()}"/>                    
+                    <h:link value="Cancel" outcome="infosEmp.xhtml"/>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

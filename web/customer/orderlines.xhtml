@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./../WEB-INF/customerTemplate.xhtml"
+                xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Order ID : 
+        <h:outputText value="#{ordersController.getPassedParameter()}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <br/>
+        <h:link value="Back to My Orders" outcome="ordersCust.xhtml"/>
+        <ui:repeat var="orderline" value="#{ordersBean.findByOrderID(ordersController.getPassedParameter()).getOrderLines()}">
+            <ui:repeat var="product" value="#{orderline.getProducts()}">
+                <p:dataTable value="#{product}" var="product">
+                    <p:column headerText="Description">
+                        <h:outputText value="#{product.description}"/>
+                    </p:column>
+                    <p:column headerText="Price">
+                        <h:outputText value="#{product.price}"/>
+                    </p:column>
+                    <p:column headerText="Size">
+                        <h:outputText value="#{product.sizeProduct}"/>
+                    </p:column>
+                    <p:column headerText="Color">
+                        <h:outputText value="#{product.color}"/>
+                    </p:column>
+                    <p:column headerText="Brand">
+                        <h:outputText value="#{product.brand}"/>
+                    </p:column>
+                    <p:column headerText="Type">
+                        <h:outputText value="#{product.type}"/>
+                    </p:column>
+                    <p:column headerText="Gender">
+                        <h:outputText value="#{product.gender}"/>
+                    </p:column>
+                    <p:column headerText="Quantity">
+                        <h:outputText value="#{orderline.quantity}"/>
+                    </p:column>
+                </p:dataTable>
+                <h:link rendered="#{orderline.orders.status=='In cart'}" value="Delete this product" outcome="deleteOrderline.xhtml">
+                    <f:param name="orderlineID" value="#{orderline.orderLineID}"/> 
+                    <f:param name="orderID" value="#{orderline.orders.orderID}"/> 
+                </h:link>
+                <br/><br/><br/>
+            </ui:repeat>
+        </ui:repeat>
+    </ui:define>
+
+</ui:composition>

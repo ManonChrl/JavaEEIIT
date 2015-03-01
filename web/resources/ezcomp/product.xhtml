@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <br/><br/><br/><br/><br/>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="description" class="col-sm-2 control-label" value="Description"/>
+            <h:panelGroup layout="block" class="col-sm-10">
+                <h:inputText binding="#{description}" id="description" class="form-control" value="#{productController.product.description}" />
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="price" class="col-sm-2 control-label" value="Price" />
+            <h:panelGroup layout="block" class="col-sm-10">
+                <h:inputText binding="#{price}"  id="price" class="form-control" value="#{productController.product.price}" >
+                    <f:convertNumber/>
+                </h:inputText>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="size" class="col-sm-2 control-label" value="Size" />
+            <h:panelGroup layout="block" class="col-sm-10">
+                <h:inputText binding="#{size}" id="size" class="form-control" value="#{productController.product.sizeProduct}"/>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="color" class="col-sm-2 control-label" value="Color" />
+            <h:panelGroup layout="block" class="col-sm-10">
+                <h:inputText id="color" class="form-control" value="#{productController.product.color}"/>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="brand" class="col-sm-2 control-label" value="Brand"/>
+            <h:panelGroup layout="block" class="col-sm-10">
+                <h:inputText id="brand" class="form-control" value="#{productController.product.brand}"/>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="quantity" class="col-sm-2 control-label"  value="Quantity"/>
+            <h:panelGroup layout="block" class="col-sm-10">
+                <h:selectOneListbox binding="#{quantity}" class="form-control" id="quantity"  value="#{productController.product.quantity}" >
+                    <f:selectItem itemValue="1" itemLabel="1" />
+                    <f:selectItem itemValue="2" itemLabel="2" />  
+                    <f:selectItem itemValue="3" itemLabel="3" />
+                    <f:selectItem itemValue="4" itemLabel="4" /> 
+                    <f:selectItem itemValue="5" itemLabel="5" /> 
+                </h:selectOneListbox>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="type" class="col-sm-2 control-label"  value="Type"/>
+            <h:panelGroup layout="block" class="col-sm-10">
+                <h:selectOneListbox binding="#{type}" class="form-control" id="type"  value="#{productController.product.type}" >
+                    <f:selectItem itemValue="Top" itemLabel="Top" />
+                    <f:selectItem itemValue="Dress" itemLabel="Dress" />
+                    <f:selectItem itemValue="Bottom" itemLabel="Bottom" />  
+                    <f:selectItem itemValue="Outerwear" itemLabel="Outerwear" /> 
+                    <f:selectItem itemValue="Boots" itemLabel="Boots" />
+                    <f:selectItem itemValue="FlipFlops" itemLabel="FlipFlops" /> 
+                    <f:selectItem itemValue="Sneakers" itemLabel="Sneakers" /> 
+                    <f:selectItem itemValue="Hats" itemLabel="Hats" /> 
+                    <f:selectItem itemValue="Belts" itemLabel="Belts" />
+                    <f:selectItem itemValue="BowTies" itemLabel="BowTies" /> 
+                    <f:selectItem itemValue="Umbrellas" itemLabel="Umbrellas" /> 
+                </h:selectOneListbox>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="gender" class="col-sm-2 control-label"  value="Gender"/>
+            <h:panelGroup layout="block" class="col-sm-10">
+                <h:selectOneListbox binding="#{gender}" class="form-control" id="gender"  value="#{productController.product.gender}" >
+                    <f:selectItem itemValue="Women" itemLabel="Women" />
+                    <f:selectItem itemValue="Men" itemLabel="Men" />  
+                    <f:selectItem itemValue="Boys" itemLabel="Boys" />
+                    <f:selectItem itemValue="Girls" itemLabel="Girls" /> 
+                    <f:selectItem itemValue="Shoes" itemLabel="Shoes" />
+                    <f:selectItem itemValue="Accessories" itemLabel="Accessories" /> 
+                </h:selectOneListbox>
+            </h:panelGroup>
+        </h:panelGroup>
+    </cc:implementation>
+</html>

@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="title">
+        Add To My Cart
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:outputText value="#{productController.setProduct(productBean.findByProductID(productController.passedParameter))}"/>
+        <h:dataTable class="table table-hover table-striped" value="#{productController.getProduct()}" var="product">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Description"/>
+                </f:facet>
+                <h:outputText value="#{product.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Price"/>
+                </f:facet>
+                <h:outputText value="#{product.price}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Size"/>
+                </f:facet>
+                <h:outputText value="#{product.sizeProduct}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Color"/>
+                </f:facet>
+                <h:outputText value="#{product.color}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Brand"/>
+                </f:facet>
+                <h:outputText value="#{product.brand}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText value="#{product.type}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Gender"/>
+                </f:facet>
+                <h:outputText value="#{product.gender}"/>
+            </h:column>
+        </h:dataTable>
+        <h:form>
+            <h5 style="color:red">/!\ Quantity max = #{productController.product.quantity}</h5>
+            Quantity :
+            <h:selectOneMenu value="#{productController.orderline.quantity}" >
+                <f:selectItem itemValue="1" itemLabel="1"/>
+                <f:selectItem itemValue="2" itemLabel="2"/>
+                <f:selectItem itemValue="3" itemLabel="3"/>
+                <f:selectItem itemValue="4" itemLabel="4"/>
+                <f:selectItem itemValue="5" itemLabel="5"/>
+            </h:selectOneMenu>
+            <h:inputHidden value="#{productController.product.productID}"/>
+            <h:commandButton type="Submit" value="Add" action="#{productController.addProductToCart()}"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

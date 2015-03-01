@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/employeeTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <ui:define name="title">
+        Edit Product
+    </ui:define>
+
+    <ui:define name="body">
+        <h:outputText rendered="#{not empty productController.getPassedParameter()}" value="#{productController.setProduct(productBean.findByProductID(productController.getPassedParameter()))}"/>
+        <h:panelGroup rendered="#{not description.valid || not price.valid
+                                  || not size.valid || not type.valid
+                                  || not gender.valid || not quantity.valid}"
+                      layout="block" class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h:messages layout="table" style="color:red"/>
+        </h:panelGroup>
+        <h:form class="form-horizontal">
+            <h:panelGroup layout="block" class="form-group">
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputHidden id="productID" class="form-control" value="#{productController.product.productID}" />
+                </h:panelGroup>
+            </h:panelGroup>
+            <ezcomp:product/>
+            <h:panelGroup layout="block" class="form-group">
+                <h:panelGroup layout="block" class="col-sm-offset-2 col-sm-10">
+                    <h:commandButton type="submit" value="Edit Product" action="#{productController.editProduct()}"/>
+                    <h:link value="Cancel" outcome="products.xhtml"/>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

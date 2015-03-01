@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/employeeTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        <h:outputText value="#{ordersController.setOrder(ordersBean.findByOrderID(ordersController.getPassedParameter()))}"/>
+        Update Order 
+        <h:outputText value="#{ordersController.getPassedParameter()}"/>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form rendered="#{facesContext.externalContext.isUserInRole('emp')}" class="form-horizontal">
+            <h:inputHidden id="orderID" value="#{ordersController.order.orderID}" />
+            <br/><br/><br/><br/><br/>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="status" class="col-sm-2 control-label" value="Status" />
+                <h:panelGroup layout="block" class="col-sm-10">
+                    <h:inputText id="status" class="form-control" value="#{ordersController.order.status}"/>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:panelGroup layout="block" class="col-sm-offset-2 col-sm-10">
+                    <h:commandButton type="submit" value="Edit Order Status" action="#{ordersController.editOrder()}"/>
+                    <h:link value="Cancel" outcome="empCust.xhtml"/>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:form> 
+    </ui:define>
+
+</ui:composition>

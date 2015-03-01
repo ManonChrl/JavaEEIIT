@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/customerTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        My Cart
+    </ui:define>
+
+    <ui:define name="body">
+
+        <ui:repeat rendered="#{facesContext.externalContext.isUserInRole('cust')}" var="order" value="#{customerBean.findByLogin(facesContext.externalContext.remoteUser).getOrderInCart()}">
+            <p:dataTable  value="#{customerBean.findByLogin(facesContext.externalContext.remoteUser).getOrderInCart()}" var="order"> 
+                <p:column headerText="Date Created">
+                    <h:outputText value="#{order.dateCreated}">
+                        <f:convertDateTime type="date" dateStyle="medium"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Date Shipped">
+                    <h:outputText value="#{order.dateShipped}">
+                        <f:convertDateTime type="date" dateStyle="medium"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="#{order.status}"/>
+                </p:column>
+                <p:column headerText="Price">
+                    <h:outputText value="#{order.price}">
+                        <f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="See Details">
+                    <p:link style="color: cornflowerblue" value="Details" outcome="orderlines.xhtml">
+                        <f:param name="orderID" value="#{order.orderID}"/> 
+                        <f:param name="custLogin" value="#{facesContext.externalContext.remoteUser}"/> 
+                    </p:link>
+                </p:column>
+                <p:column headerText="Order">
+                    <h:form>
+                        <h:commandLink style="color: cornflowerblue" value="Order" action="#{ordersController.orderCartToOrder()}">
+                            <f:param name="orderID" value="#{order.orderID}"/>
+                        </h:commandLink>
+                    </h:form>
+                </p:column>
+            </p:dataTable>
+        </ui:repeat>
+
+    </ui:define>
+
+</ui:composition>

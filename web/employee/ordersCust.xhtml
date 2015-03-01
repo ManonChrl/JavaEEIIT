@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/employeeTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <ui:define name="title">
+        <h:panelGroup layout="block" rendered="#{not empty employeeController.getPassedParameter()}">
+            <h:outputFormat value="Customer ID : "/>
+            <h:outputText value="#{customerBean.findByLogin(employeeController.getPassedParameter()).customerID}"/>
+        </h:panelGroup>
+    </ui:define>
+
+    <ui:define name="body">
+        <br/>
+        <ui:repeat rendered="#{facesContext.externalContext.isUserInRole('emp')and not empty employeeController.getPassedParameter()}" var="order" value="#{customerBean.findByLogin(employeeController.getPassedParameter()).getOrders()}">
+            <p:dataTable value="#{order}" var="order"> 
+                <p:column headerText="Order ID">
+                    <h:outputText value="#{order.orderID}"/>
+                </p:column>
+                <p:column headerText="Date Created">
+                    <h:outputText value="#{order.dateCreated}">
+                        <f:convertDateTime type="date" dateStyle="medium"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Date Shipped">
+                    <h:outputText value="#{order.dateShipped}">
+                        <f:convertDateTime type="date" dateStyle="medium"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="#{order.status}"/>
+                </p:column>
+                <p:column headerText="Price">
+                    <h:outputText value="#{order.price}"/>
+                </p:column>
+                <p:column headerText="OrderLine ID">
+                    <h:outputText value="#{ordersController.displayOrdersLinesID(order)}"/>
+                </p:column>
+                <p:column headerText="Update Status">
+                    <p:link style="color: cornflowerblue" value="Update" outcome="updateOrder.xhtml">
+                        <f:param name="orderID" value="#{order.orderID}"/>  
+                    </p:link>
+                </p:column>
+                <p:column headerText="See Details">
+                    <p:link style="color: cornflowerblue" value="Details" outcome="orderlines.xhtml">
+                        <f:param name="orderID" value="#{order.orderID}"/> 
+                        <f:param name="custLogin" value="#{employeeController.getPassedParameter()}"/> 
+                    </p:link>
+                </p:column>
+            </p:dataTable>
+        </ui:repeat>
+
+
+        <br/><br/><br/>
+        <h:link value="Back to List of Customers" outcome="empCust.xhtml"/>
+
+    </ui:define>
+
+</ui:composition>
